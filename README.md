@@ -1,33 +1,32 @@
 # szExportToTableMap
- Used to take a Senzing Export file and create two csv files (Enntity Map and Relationship Map)
+Example script used to take a Senzing Export file and create two csv files (Enntity Map and Relationship Map)
 
-Created By: TheLohrax
-Created on: 12/16/2022
-Tested On Senzing Version 3.3.2
+# Dependencies
+Use Senzing G2Export.py command to genarate an export file
+    NOTE: Must be a export file format of CSV
+    ## Reference
+    G2Export - How to Consume Resolved Entity Data
+        (https://senzing.zendesk.com/hc/en-us/articles/115004915547-G2Export-How-to-Consume-Resolved-Entity-Data)
 
-Modified Date/By/Reason/Tested on Sz Version:
-|--
-|--
-|--
+    ## Example 
+        ./G2Export.py -F CSV -f 0 -x -o myExport.csv
+    ## Python Module
+       sqlite3 python module must be installed
+           ### Linux
+           pip install sqlite3
 
- Used to take a Senzing Export file and create two csv files
+# Usage
+usage: szExportToTableMap exportFileToProcess outputLocation
+    ## Linux
+    python3 szExportToTableMap mySenzingExportFile.csv ~/output/ 
+
+Used to take a Senzing Export file and create two csv files
     These files can be used to loaded to tables
     File 1 is Entity Map
     File 2 is the Relationship Map
 
 
-Format = transformFile(inFile,outFileLocation)
-Example execution string
-    python3 szExportToTableMap.py myExport.csv output/
-
-G2Export.py command used to genarate the Sz Export file
-    ./G2Export.py -F CSV -f 0 -x -o myExport.csv
-
-Reference:
-   G2Export - How to Consume Resolved Entity Data
-       (https://senzing.zendesk.com/hc/en-us/articles/115004915547-G2Export-How-to-Consume-Resolved-Entity-Data)
-
-Sudo Logic
+# Sudo Logic
     Read the Senzing export file (myExport.csv) into an in-memory SQLite tabel
 
     Select all rows that have a RELATED_ENTITY_ID = 0 and create a CSV flie of:
