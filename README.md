@@ -27,6 +27,7 @@ szExportToTableMap exportFileToProcess outputLocation
 # Sudo Logic
 Read the Senzing export file (myExport.csv) into an in-memory SQLite tabel
 
+Entity Map
     Select all rows that have a RELATED_ENTITY_ID = 0 and create a CSV flie of:
         File Name: szEntityMap.csv
             Column Name:
@@ -39,6 +40,7 @@ Read the Senzing export file (myExport.csv) into an in-memory SQLite tabel
                (NOTE: The first record added to the entity will not
                have a MATCH_KEY)
 
+Relationship Map
     Select all rows that have a RELATED_ENTITY_ID <> 0 output to CSV of:
         File Name: szRelationshipMap.csv
             ENTITY_ID (the left entity id of the relationship)
