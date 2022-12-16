@@ -51,4 +51,4 @@ Relationship Map
                 2 = Possible match
                 3 = Relationship
                 11 = Disclosed Relationship
-            MATCH_KEY (The reason why the two entities are realted)
+            MATCH_KEY (The reason why the two entities are related)
