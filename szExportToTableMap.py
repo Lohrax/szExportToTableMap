@@ -1,54 +1,64 @@
 '''
 Created By: TheLohrax
 Created on: 12/16/2022
-Tested On Senzing Version 3.3.2
+Tested against Senzing Version 3.3.2
 
-Modified Date/By/Reason/Tested on Sz Version:
-|--
-|--
-|--
+# szExportToTableMap
+Example script used to take a Senzing Export file and create two csv files (Entity Map and Relationship Map)
 
- Used to take a Senzing Export file and create two csv files
-    These files can be used to loaded to tables
-    File 1 is Entity Map
-    File 2 is the Relationship Map
+# Dependencies
+Use Senzing G2Export.py command to generate an export file
+    NOTE: Must be a export file format of CSV
 
+Reference
+    G2Export - How to Consume Resolved Entity Data
+        (https://senzing.zendesk.com/hc/en-us/articles/115004915547-G2Export-How-to-Consume-Resolved-Entity-Data)
 
-Format = transformFile(inFile,outFileLocation)
-Example execution string
-    python3 szExportToTableMap.py myExport.csv output/
-
-G2Export.py command used to genarate the Sz Export file
+### Senzing Export Example 
     ./G2Export.py -F CSV -f 0 -x -o myExport.csv
 
-Reference:
-   G2Export - How to Consume Resolved Entity Data
-       (https://senzing.zendesk.com/hc/en-us/articles/115004915547-G2Export-How-to-Consume-Resolved-Entity-Data)
+### Python Module
+sqlite3 python module must be installed
 
-Sudo Logic
-    Read the Senzing export file (myExport.csv) into an in-memory SQLite tabel
-    Select all rows that have a RELATED_ENTITY_ID = 0 and create a CSV flie of:
-      File Name: szEntityMap.csv
-      Column Name:
-          ENTITY_ID (the grouping or cluster id for all records that
-              belong to the same physical entity)
-          DATA_SOURCE (The source system where the input record came from)
-          RECORD_ID (The unique identifier that was provided for an
-              input record)
-          MATCH_KEY (The reason why this record was added to the entity)
-                 (NOTE: The first record added to the entity will not
-                     have a MATCH_KEY)
+### Linux Example
+    pip install sqlite3
+
+# Usage
+szExportToTableMap exportFileToProcess outputLocation
+
+## Linux Example
+    python3 szExportToTableMap mySenzingExportFile.csv ~/output/ 
+
+# Sudo Logic
+Read the Senzing export file (myExport.csv) into an in-memory SQLite table
+
+Entity Map
+
+    Select all rows that have a RELATED_ENTITY_ID = 0 and create a CSV file of:
+        File Name: szEntityMap.csv
+            Column Name:
+            ENTITY_ID (the grouping or cluster id for all records that
+                belong to the same physical entity)
+            DATA_SOURCE (The source system where the input record came from)
+            RECORD_ID (The unique identifier that was provided for an
+               input record)
+            MATCH_KEY (The reason why this record was added to the entity)
+               (NOTE: The first record added to the entity will not
+               have a MATCH_KEY)
+
+Relationship Map
 
     Select all rows that have a RELATED_ENTITY_ID <> 0 output to CSV of:
-      File Name: szRelationshipMap.csv
-          ENTITY_ID (the left entity id of the relationship)
-          RELATED_ENTITY_ID (the right entity id of the relationship)
-          MATCH_LEVEL (the level of the relationship)
-              2 = Possible match
-              3 = Relationship
-              11 = Disclosed Relationship
-          MATCH_KEY (The reason why the two entities are realted)
+        File Name: szRelationshipMap.csv
+            ENTITY_ID (the left entity id of the relationship)
+            RELATED_ENTITY_ID (the right entity id of the relationship)
+            MATCH_LEVEL (the level of the relationship)
+                2 = Possible match
+                3 = Relationship
+                11 = Disclosed Relationship
+            MATCH_KEY (The reason why the two entities are related)
 '''
+
 
 import sys
 import time
@@ -211,7 +221,7 @@ def transformFile(inFile, outFileLocation, dbFile=":memory:"):
 inFile = sys.argv[1]
 outFileLocation = sys.argv[2]
 
-# Format = transformFile(inFile,outFileLocation)
+# Format = szExportToTableMap.py(inFile,outFileLocation)
 # Example execution string
 #     python3 szExportToTableMap.py DataIn/szExport.csv DataOut/
 
