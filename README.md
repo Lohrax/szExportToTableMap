@@ -4,7 +4,7 @@ Example script used to take a Senzing Export file and create two csv files (Ennt
 # Dependencies
 Use Senzing G2Export.py command to genarate an export file
     NOTE: Must be a export file format of CSV
-    ## Reference
+Reference
     G2Export - How to Consume Resolved Entity Data
         (https://senzing.zendesk.com/hc/en-us/articles/115004915547-G2Export-How-to-Consume-Resolved-Entity-Data)
 
