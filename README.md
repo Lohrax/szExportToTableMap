@@ -9,11 +9,13 @@ Reference
     G2Export - How to Consume Resolved Entity Data
         (https://senzing.zendesk.com/hc/en-us/articles/115004915547-G2Export-How-to-Consume-Resolved-Entity-Data)
 
-    ## Example 
-        ./G2Export.py -F CSV -f 0 -x -o myExport.csv
-    ## Python Module
-       sqlite3 python module must be installed
-           ### Linux
+### Example 
+./G2Export.py -F CSV -f 0 -x -o myExport.csv
+
+### Python Module
+sqlite3 python module must be installed
+
+### Linux
            pip install sqlite3
 
 # Usage
