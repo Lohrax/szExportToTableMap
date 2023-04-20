@@ -1,5 +1,5 @@
 # szExportToTableMap
-Example script used to take a Senzing Export file and create two csv files (Enntity Map and Relationship Map)
+Example script used to take a Senzing Export file and create two csv files (Entity Map and Relationship Map)
 
 ## Dependencies
 Use Senzing G2Export.py command to genarate an export file \
